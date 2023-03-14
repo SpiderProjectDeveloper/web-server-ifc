@@ -1,0 +1,87 @@
+.smartAttachContainer {
+	width: 100%;
+}
+
+.smartAttachWork {
+	margin:2px 2px 4px 2px;
+}
+
+.smartAttachWorkHead {
+	display: block; white-space: nowrap; 
+}
+
+.smartAttachMessage {
+	width: 100%; font-style: italic; color: #efefef; padding:4px; font-size:12px; 
+}
+
+.smartAttachButton {
+	width: 100%;
+	cursor: pointer; margin-bottom:2px; padding:8px; background-color:#4f4f4f; color:#afafaf; 
+	text-align:center; font-weight:bold; font-size: 12px;
+}
+
+.smartAttachAppend {
+	width: 100%;
+	cursor: pointer; margin-bottom:2px; padding:4px; background-color:#4f4f4f; color:#afafaf; 
+	text-align:center; font-weight:bold; font-size: 18px;
+}
+
+.smartAttachSave, .smartAttachRestore {
+	width: 50%;
+	display:inline-block; margin:2px 0px 2px 0px; padding:8px; box-sizing: border-box;
+	cursor: pointer; background-color:#4f4f4f; color:#afafaf; 
+	text-align:center; font-weight:bold; font-size: 12px;
+}
+
+.smartAttachButton:hover, .smartAttachSave:hover, .smartAttachRestore:hover, .smartAttachAppend:hover {
+	color:#ffffff
+}
+
+.smartAttachExpand { 
+	display: inline-block; cursor: pointer;  
+	padding:2px 4px 2px 4px; font-size:14px; font-weight: bold;; 
+}
+.smartAttachWorkNameInput { 
+	display: inline-block;
+	border:0px; background-color:#0f0f0f; color: #d0d0d0; padding:2px;
+	width: 160px; 
+}
+
+.smartAttachWorkTypeInput { 
+	display: inline-block; 
+	border:0px; background-color:#0f0f0f; color: #d0d0d0; padding:2px;
+	width: 80px;
+}
+
+.smartAttachWorkTypeSelect { 
+	display: inline-block; cursor: pointer;
+	margin-left:4px; margin-right:4px; 
+}
+
+.smartAttachRemove { 
+	cursor: pointer; display: inline-block; 
+	margin-left:12px; padding:2px 4px 2px 4px; font-size:14px; 
+}
+
+.smartAttachSettings {
+	display: none; background: color #4f4f4f; padding: 2px 2px 4px 12px; 
+}
+
+.smartAttachTypes {
+	width: 100%; margin: 8px 0px 8px 0px;
+}
+.smartAttachType { 
+	display: inline-block; border: 1px solid #afafaf; border-radius: 4px; 
+	margin:2px; padding:4px; white-space: nowrap; font-size: 11px; 
+}
+.smartAttachTypeTitle { display: inline-block; font-size: 11px; color: #dfdfdf; }
+.smartAttachTypeName { display: inline-block; font-size: 11px; }
+.smartAttachTypeInput { display: inline-block; margin: 2px; }
+
+.smartAttachMaterials {
+	width: 100%;
+	border-bottom:2px solid #afafaf;
+}
+.smartAttachMaterial { display: inline-block; white-space: nowrap; padding:4px; font-size: 11px; }
+.smartAttachMaterialName { display: inline-block; font-size: 11px; }
+.smartAttachMaterialInput { display: inline-block; margin: 2px; }

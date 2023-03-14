@@ -1,0 +1,85 @@
+
+#ifc-treeview::-webkit-scrollbar {
+	width: 8px;
+}
+
+#ifc-treeview::-webkit-scrollbar-thumb {
+	background: #afafaf;
+}
+
+#ifc-canvas {
+	position: absolute;
+	left:0; top:0; width: 0; height: 0;
+	overflow:hidden;
+}
+
+#ifc-toolbox {
+	position:absolute;
+	left: 90%; top:0; width: 0; height: 0;
+	background-color:#f7f7f7;
+}
+
+#ifc-treeview {
+	width:100%;
+	border-left: 8px solid #f7f7f7;
+	border-right: 8px solid #f7f7f7;
+	height: calc(100%-40px);
+	overflow:scroll;
+	background-color:#ffffff;
+}
+
+.ifc-treeview-element {
+	font-family: Lucida Console, Courier, monospace;
+	cursor: pointer;
+	color: #777777;
+	white-space: nowrap;
+}
+
+.ifc-treeview-checkbox {
+	display:inline-block;
+	font-size:12px;
+}
+
+.ifc-treeview-expander {
+	display: inline-block;
+	font-family: Lucida Console, Courier, monospace;
+	font-size: 12px;
+	color: #4444ff;
+}
+
+.ifc-treeview-title {
+	display: inline-block;
+	font-family: Lucida Console, Courier, monospace;
+	font-size: 12px;
+	color: #777777;
+}
+.ifc-treeview-title:hover {
+	color:#222222;
+}
+
+.ifc-treeview-title-filtered-by-type {
+	display: inline-block;
+	font-family: Lucida Console, Courier, monospace;
+	font-weight: bold; background-color: #efefef;
+	font-size: 12px;
+	color: #777777;
+}
+
+.ifc-treeview-title-filtered-by-type:hover {
+	color: #222222;
+}
+
+.ifc-treeview-title-filtered-by-type-parent {
+	display: inline-block;
+	font-family: Lucida Console, Courier, monospace;
+	font-weight: bold; background-color: #f7f7f7;
+	font-size: 12px;
+	color: #222222;
+}
+
+.ifc-treeview-custom-title {
+	display: inline-block;
+	font-family: Lucida Console, Courier, monospace;
+	font-weight: bold; font-size: 12px;
+	color: #447744;
+}

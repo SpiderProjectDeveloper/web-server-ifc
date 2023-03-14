@@ -1,0 +1,61 @@
+﻿.tree-edit-node-div { 
+	position:relative; box-sizing:border-box; width: (100% - 24px); margin:0px 0px 0px 12px; font-family: Courier New; 
+}
+.tree-edit-node-upper-title-div { 
+	box-sizing:border-box; width: 100%; margin:0;
+	height:8px; max-height:8px; min-height:8px; background-color:#ffffff; 
+}
+.tree-edit-node-upper-title-div-droppable { 
+	box-sizing:border-box; width: 100%; margin:0; 
+	height:16px; max-height:16px; min-height:16px; 
+	border:1px dotted #bfbfbf; 
+}
+
+.tree-edit-node-properties-div {
+	box-sizing:border-box; position:absolute; top: 8px; right: 0; 
+	white-space: nowrap; margin-left:0px; margin-right:0px; padding:0px 4px 0px 2px; 
+	border-radius: 2px; border: 1px solid #dfdfdf;
+	background-color:#ffffff; color: #4f4f4f; font-size:12px; 
+}
+
+.tree-edit-node-attachments-div {
+	cursor: help; box-sizing:border-box; display: inline-block;
+	white-space: nowrap; margin-left:0px; margin-right:0px; padding:1px;
+	background-color:#ffffff; color: #4f4f4f; font-size:12px; 
+}
+
+.tree-edit-node-work-type-div {
+	cursor: pointer; box-sizing:border-box; display: inline-block; 
+	white-space: nowrap; margin-left:0px; margin-right:0px; padding:1px;
+	background-color:#ffffff; color: #4f4f4f; font-size:12px; 
+}
+
+.tree-edit-node-expand-div {
+	cursor: pointer; box-sizing:border-box; position:absolute; top: 8px; left: -12px; 
+	white-space: nowrap; padding:2px; border-radius: 2px;
+	background-color:#7f7f7f; color: #ffffff; font-size:12px; 
+}
+
+.tree-edit-node-title-div { 
+	box-sizing:border-box; width: 100%; margin:0; padding:1px 2px 1px 2px; cursor: pointer; 
+	overflow: hidden; white-space: nowrap; color: #5f5f5f; font-size:16px;
+}
+.tree-edit-node-title-div:hover { 
+	color: #000000; 
+}
+.tree-edit-node-title-div-droppable { 
+	box-sizing:border-box; width: 100%; margin:0; padding:1px 2px 1px 2px; cursor: pointer; 
+	overflow: hidden; white-space: nowrap;  
+	border:1px dotted #bfbfbf; color: #5f5f5f; font-size:16px;
+}
+
+.tree-edit-node-title-div-highlighted {
+	box-sizing:border-box; width: 100%; margin:0; padding:1px 2px 1px 2px; cursor: pointer; 
+	background-color:#d0e0f0; color: #202020; 
+}
+
+.tree-edit-node-children-div { display: block; margin-left: 8px; }
+.tree-edit-node-div-editor-input { position: absolute; margin-left:2px; border:1px dotted #afafaf; }
+.tree-edit-node-div-editor-input:focus { border:1px dotted #afafaf; }
+
+
