@@ -155,7 +155,7 @@ export class AData {
 			}
 		}.bind(this);
 
-		xmlhttp.open("GET", this.settings.dataUrl + '?' + decodeURIComponent(this.projectId), true);
+		xmlhttp.open("GET", this.settings.dataUrl + '?' + "projectId=" + decodeURIComponent(this.projectId), true);
 		xmlhttp.setRequestHeader("Cache-Control", "no-cache");
 		xmlhttp.send();
 	}

@@ -6,7 +6,8 @@
 		};	
 */
 
-export async function addEntry( treeview, parentExpressId, node ) {
+export async function addEntry( treeview, parentExpressId, node ) 
+{
 	let pentry = (parentExpressId) ? treeview.idMap[ parentExpressId ] : null; 
 	let level = (pentry) ? (pentry.level + 1) : 0;
 	let parentDiv = (pentry) ? pentry.div : treeview.containerDiv;
@@ -19,7 +20,8 @@ export async function addEntry( treeview, parentExpressId, node ) {
 	
 	let typeName = node['type'];
 	let typeNumber;
-	if( !(typeName in treeview.typesMap) ) {
+	if( !(typeName in treeview.typesMap) ) 
+	{
 		let itemProps = await treeview.getItemPropertiesCallback( expressId ); // [ pname, pgid, typeNumber ] 
 		typeNumber = itemProps[2];
 		treeview.typesMap[typeName] = typeNumber; // typeNumber;
@@ -28,8 +30,10 @@ export async function addEntry( treeview, parentExpressId, node ) {
 	}
 
 	let materials = await treeview.getItemMaterialsCallback( expressId );
-	if( materials.length > 0 ) {
-		for( let m of materials ) {
+	if( materials.length > 0 ) 
+	{
+		for( let m of materials ) 
+		{
 			if( !(m[0] in treeview.materialsMap) ) {
 				treeview.materialsMap[ m[0] ] = m[1];
 			}
@@ -40,7 +44,8 @@ export async function addEntry( treeview, parentExpressId, node ) {
 		}
 	}
 
-	if( !node.children || !node.children.length ) {	// Has no children, not expandable then...
+	if( !node.children || !node.children.length ) 
+	{	// Has no children, not expandable then...
 		let [ checkBox, titleDiv ] = await createCheckable(treeview, nodeDiv, node, level);
 		parentDiv.appendChild(nodeDiv);
 		treeview.idMap[expressId] = { 
@@ -85,22 +90,44 @@ export async function addEntry( treeview, parentExpressId, node ) {
 
 	parentDiv.appendChild(nodeDiv);
 
-	for( let i = 0 ; i < node.children.length ; i++ ) {
+	if( level < 3 ) 
+	{
 		nodeDiv.dataset.expanded = 'y';
+		nodeDiv.dataset.childEntriesAdded = 'y';
 		expandDiv.innerHTML = treeview.collapseText;
-		await addEntry( treeview, expressId, node.children[i] );
+		for( let i = 0 ; i < node.children.length ; i++ ) 
+		{
+			await addEntry( treeview, expressId, node.children[i] );
+		}
+	} else {
+		nodeDiv.dataset.childEntriesAdded = 'n';
 	}
 
-	const expandListener = function(e) {
+	const expandListener = async function(e) 
+	{
 		e.stopPropagation();
-		if( nodeDiv.dataset.expanded === 'n') {
+		if( nodeDiv.dataset.childEntriesAdded === 'n') 
+		{
+			nodeDiv.dataset.expanded = 'y';
+			nodeDiv.dataset.childEntriesAdded = 'y';
+			expandDiv.innerHTML = treeview.collapseText;
+			for( let i = 0 ; i < node.children.length ; i++ ) 
+			{
+				await addEntry( treeview, expressId, node.children[i] );
+			}
+			return;
+		} 
+		
+		if( nodeDiv.dataset.expanded === 'n') 
+		{
 			nodeDiv.dataset.expanded = 'y';
 			expandDiv.innerHTML = treeview.collapseText;
 			for( let i = 1 ; i < nodeDiv.children.length ; i++ ) {
 				let childDiv = nodeDiv.children[i];
 				childDiv.style.display = 'block';
 			}
-		} else {
+		} else 
+		{
 			nodeDiv.dataset.expanded = 'n';
 			expandDiv.innerHTML = treeview.expandText;
 			for( let i = 1 ; i < nodeDiv.children.length ; i++ ) {
@@ -109,12 +136,13 @@ export async function addEntry( treeview, parentExpressId, node ) {
 			}
 		}
 	}
-	expandDiv.addEventListener('click', expandListener, false );
+	expandDiv.addEventListener( 'click', expandListener, false );
 	return nodeDiv;
 }
 
 
-function onRightButton( e, treeview, nodeDiv ) {
+function onRightButton( e, treeview, nodeDiv ) 
+{
 	let eid = treeview.getDatasetExpressId(nodeDiv);
 	if( eid === null ) {
 		return;
@@ -151,19 +179,23 @@ function onRightButton( e, treeview, nodeDiv ) {
 	treeview.contextMenu.show( e, items, { elem:nodeDiv, backgroundColor:treeview.highlightColor } );
 }
 
-function checkByType( args ) {
+function checkByType( args ) 
+{
 	let [ treeview, entry, type, check ] = args;
 	if( !treeview.checkIsAllowedCallback() ) {
 		return;
 	}
 	let checkIds = [];
-	const doEntry = function( entry_ ) {
-		if( (type === null) || (entry_.type === type) ) {
+	const doEntry = function( entry_ ) 
+	{
+		if( (type === null) || (entry_.type === type) ) 
+		{
 			entry_.checkBox.checked = check;
 			//treeview.checkCallback(entry_.expressId, check);
 			checkIds.push( entry_.expressId ); 
 		}
-		if( entry_.children ) {
+		if( entry_.children ) 
+		{
 			for( let childExpressId of entry_.children ) {
 				if( treeview.idMap[childExpressId] ) {
 					doEntry( treeview.idMap[childExpressId] );
@@ -177,12 +209,14 @@ function checkByType( args ) {
 	}
 }
 
-function clearFilteredByType( args ) {
+function clearFilteredByType( args ) 
+{
 	let [ treeview ] = args;
 	treeview.clearFilteredByType();
 }
 
-function filterByType( args ) {
+function filterByType( args ) 
+{
 	let [ treeview, entry, type ] = args;
 
 	treeview.filteredByTypeParent = treeview.idMap[entry.expressId].titleDiv;
@@ -208,7 +242,8 @@ function filterByType( args ) {
 	treeview.filterByIdsCallback( treeview.filteredByType );
 }
 
-function isRightButton(e) {
+function isRightButton(e) 
+{
 	let isRight;
 	e = e || window.event;
 	if ("which" in e)  // Gecko (Firefox), WebKit (Safari/Chrome) & Opera
@@ -218,7 +253,8 @@ function isRightButton(e) {
 	return isRight;
 }
 
-async function createTitleText( treeview, node ) {
+async function createTitleText( treeview, node ) 
+{
 	let name;
 	if( 'expressID' in node ) {
 		name = await treeview.getItemNameCallback(node['expressID']);
@@ -231,7 +267,8 @@ async function createTitleText( treeview, node ) {
 	return name;
 }
 
-function createCheckbox( isChecked = false, node = null, treeview ) {
+function createCheckbox( isChecked = false, node = null, treeview ) 
+{
 	let callback = treeview.checkCallback;
 	let isAllowedCallback = treeview.isAllowedCallback;
 	let bgColor = treeview.bgColor;
@@ -254,7 +291,8 @@ function createCheckbox( isChecked = false, node = null, treeview ) {
 	return cb;
 }
 
-async function createCheckable( treeview, nodeDiv, node, level ) {
+async function createCheckable( treeview, nodeDiv, node, level ) 
+{
 	let checkBox = createCheckbox(false, node, treeview );
 
 	let expandDiv = null;
@@ -274,7 +312,8 @@ async function createCheckable( treeview, nodeDiv, node, level ) {
 	return [ checkBox, titleDiv ];
 }
 
-async function createExpandable( treeview, node, level ) {
+async function createExpandable( treeview, node, level ) 
+{
 	let containerDiv = document.createElement('div');
 
 	let checkBox = createCheckbox(false, node, treeview);
@@ -296,7 +335,8 @@ async function createExpandable( treeview, node, level ) {
 	return [ containerDiv, checkBox, titleDiv, expandDiv ];
 }
 
-function findAllUnexpandableChildNodes(node) {
+function findAllUnexpandableChildNodes(node) 
+{
 	let nodeList = [];
 	const doNode = function(node, nodeList ) {
 		if( !node.children || !node.children.length ) {
@@ -312,7 +352,8 @@ function findAllUnexpandableChildNodes(node) {
 }
 
 
-function findAllChildNodes(node) {
+function findAllChildNodes(node) 
+{
 	let nodeList = [];
 	const doNode = function(node, nodeList ) {
 		nodeList.push(node['expressID']);
@@ -328,7 +369,8 @@ function findAllChildNodes(node) {
 }
 
 
-export function formatCheckedDiv(div, check, bgColor, checkColor, enable=null ) {
+export function formatCheckedDiv(div, check, bgColor, checkColor, enable=null ) 
+{
 	//div.style.backgroundColor = (check) ? checkColor : bgColor;
 	div.innerHTML = (check) ? '☑' : '☐';
 	div.dataset.checked = (check) ? 'y' : 'n';

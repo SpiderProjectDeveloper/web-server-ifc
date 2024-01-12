@@ -161,11 +161,13 @@ export class Ifc
 		this.modeSwitcher();
 	}
 
-	async setCoordsToOrigin() {
+	async setCoordsToOrigin() 
+	{
 		await this.ifcLoader.ifcManager.applyWebIfcConfig({ COORDINATE_TO_ORIGIN: true, USE_FAST_BOOLS: true });
 	}
 
-	setAttachmentsUpdateCallback( cb ) {
+	setAttachmentsUpdateCallback( cb ) 
+	{
 		this.attachments.setUpdateCallback(cb);
 	}
 
@@ -404,7 +406,8 @@ export class Ifc
 	}
 
 	// Highlights elements alreay attached to data items of the same type
-	highlightAttached() {
+	highlightAttached() 
+	{
 		let i = this.attachments.getSelectedActivity(); 
 		let t = this.attachments.getSelectedActivityType(); 
 		if( this.initer.settings.highlightAttached && i !== null && i >= -1 && t !== null && t !== -1 ) {
@@ -427,7 +430,8 @@ export class Ifc
 		}
 	}
 
-	highlightActivityAttachments(activityId, t, prevActivityId) {
+	highlightActivityAttachments(activityId, t, prevActivityId) 
+	{
 		if( this.ifcModel === null ) {
 			return;
 		}	
@@ -737,13 +741,13 @@ export class Ifc
 		return [isoToUtf8(name), gid, type];
 	}
 
-	loadModel(ifcURL, fileName, fileUpload=null, callback=null) 
+	async loadModel(ifcURL, fileName, fileUpload=null, callback=null) 
 	{
 		this.fileUpload = fileUpload;		// Saving file object 
 		this.fileName = fileName;		// Saving file name 
 
 		this.messageBox.show(`${this.locale.msg('wait_loading_ifc')}<br/>${this.fileName}`);
-
+		await this.ifcLoader.ifcManager.setWasmPath("/");
 		this.ifcLoader.load(
 			ifcURL, 
 			async function(ifcModel) 

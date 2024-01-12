@@ -29,10 +29,12 @@ export class IFCTreeView {
 	materialsMap = {};
 	typeMaterialCombinationsMap = {};
 
-	constructor( locale, containerDiv, rootNode, options = {} ) {
+	constructor( locale, containerDiv, rootNode, options = {} ) 
+	{
 		this.locale = locale;
 		
-		if( containerDiv.children.length > 0 ) {
+		if( containerDiv.children.length > 0 ) 
+		{
 			while( containerDiv.hasChildNodes() ) {
 				containerDiv.removeChild(containerDiv.lastChild);
 			}
@@ -77,11 +79,13 @@ export class IFCTreeView {
 		this.contextMenu = new ContextMenu( { fontSize: '12px'} );
 	}
 
-	async createEntries() {
+	async createEntries() 
+	{
 		this.rootDiv = await addEntry( this, null, this.rootNode ); 
 	}
 
-	highlightPicked( expressId ) {
+	highlightPicked( expressId ) 
+	{
 		if( this.pickedExpressId !== null ) {
 			let mapEntry = this.idMap[this.pickedExpressId];
 			if( mapEntry && mapEntry.titleDiv ) {
@@ -98,7 +102,8 @@ export class IFCTreeView {
 		}
 	}
 
-	highlightChecked( expressId, check=true, enable = null ) {
+	highlightChecked( expressId, check=true, enable = null ) 
+	{
 		let mapEntry = this.idMap[expressId];
 		if( mapEntry && mapEntry.checkBox ) {
 			formatCheckedDiv( mapEntry.checkBox, check, this.bgColor, this.checkColor, enable );
@@ -107,11 +112,14 @@ export class IFCTreeView {
 }
 
 
-IFCTreeView.prototype.export = async function() {	
-		const exportDiv = async function(div, activities, materialsMap, activitiesMaterials, level) {
+IFCTreeView.prototype.export = async function() 
+{	
+		const exportDiv = async function(div, activities, materialsMap, activitiesMaterials, level) 
+		{
 			let id = parseInt(div.dataset.expressId);
 			let entry = this.idMap[id];
-			if( entry.checkBox.checked ) {
+			if( entry.checkBox.checked ) 
+			{
 				level++;
 				let activity = {};
 				let info = await this.getItemInfoCallback( id );
@@ -141,7 +149,8 @@ IFCTreeView.prototype.export = async function() {
 				activities.push(activity);
 			}
 
-			if( entry.children ) {
+			if( entry.children ) 
+			{
 				for( let i = 1 ; i < div.children.length ; i++ ) {
 					await exportDiv( div.children[i], activities, materialsMap, activitiesMaterials, level );
 				}
@@ -177,9 +186,10 @@ IFCTreeView.prototype.export = async function() {
 			materials: exportMaterials, activitiesMaterials: exportActivitiesMaterials };	
 }
 
-IFCTreeView.prototype.checkAll = function(check, enable=true ) {
-
-	const checkDiv = function( div ) {
+IFCTreeView.prototype.checkAll = function(check, enable=true ) 
+{
+	const checkDiv = function( div ) 
+	{
 		let id = parseInt(div.dataset.expressId);
 		if( id === null ) {
 			return;
@@ -202,19 +212,22 @@ IFCTreeView.prototype.checkAll = function(check, enable=true ) {
 	checkDiv( this.rootDiv );
 }
 
-IFCTreeView.prototype.checkById = function( ids, check ) {
+IFCTreeView.prototype.checkById = function( ids, check ) 
+{
 	for( let id of ids ) {
 		this.highlightChecked( id, check )
 	}
 }
 
-IFCTreeView.prototype.checkByIds = function(ids) {
+IFCTreeView.prototype.checkByIds = function(ids) 
+{
 	for( let id of ids ) {
 		this.highlightChecked( id, true );
 	}
 }
 
-IFCTreeView.prototype.clearFilteredByType = function() {
+IFCTreeView.prototype.clearFilteredByType = function() 
+{
 	if( !this.filteredByType ) {
 		return;
 	}
@@ -231,7 +244,8 @@ IFCTreeView.prototype.clearFilteredByType = function() {
 } 
 
 
-IFCTreeView.prototype.getDatasetExpressId = function( elem ) {
+IFCTreeView.prototype.getDatasetExpressId = function( elem ) 
+{
 	let eid = null;
 	if( 'expressId' in elem.dataset ) {
 		try {
